@@ -1,0 +1,100 @@
+<!doctype html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<style>
+	.main-div{
+	        text-align: center;
+			margin-top: 50px;
+			border-radius: 8px;
+			border: 2px solid #fff;
+			padding: 40px;
+			font-weight: 600;
+			/* align-items: center; */
+			margin-left: 330px;
+	}
+	body{
+	    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3myWfHbULrXBZmagILobMFbY9od6UcbGJI9Rhf1YVi0ibwWZJ);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	}
+	label{
+		color:white;
+	}
+	#avatar{
+		color:#fff;
+	}
+</style>
+</head>
+
+<html>
+   <body>
+   <div>
+   <h1 style="text-align: center;margin-top:40px; color:#fff;">Traffic Signal Image Classification</h1></div>
+   <div class="justify-content-md-center col-md-offset-6 col-md-6 main-div">
+		<label style="margin-top:20px;margin-left:-130px;">Choose a classifier</label>
+		<select id="classifier" name="classifier">
+		  <option value="randomForestClassifier.p">Random Forest</option>
+		  <option value="MLPClassifier.p">MLP</option>
+		  <option value="linSvcClassifier.p">Linear SVC</option>
+		</select><br/>
+		<label style="margin-top:40px;margin-left: 50px;">Select an image here</label>
+		<input id="avatar" type="file" name="avatar" onchange="readURL(this);" />
+		<div id="image-block" style="display:none;"><img id="blah" src="#" style="border: 3px solid; border-radius: 27px; margin-top:20px;" alt="your image" /></div>
+		<h4 style="color:#fff ; margin-top:20px;  font-weight:800 ; font-size: 26px" id="imageClassPlaceHolder"></h4>
+		<div style="margin-top:30px;">
+			<button id="upload" class="btn btn-warning" style="margin-left:-65px;" value="Upload"> Upload </button>
+		</div>
+	</div>
+    <script>
+	function readURL(input) {
+		$("#image-block").css("display", "block")
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(300)
+                    .height(300);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+        $(document).on("click", "#upload", function() {
+            var file_data = $("#avatar").prop("files")[0];   // Getting the properties of file from file field
+            var form_data = new FormData();
+
+			var classfierName = $("#classifier").val();
+
+			// Creating object of FormData class
+            form_data.append("file", file_data)              // Appending parameter named file with properties of file_field to form_data
+            form_data.append("user_id", 123)
+			form_data.append("classifier", classfierName)
+			// Adding extra parameters to form_data
+            $.ajax({
+                        url: "http://127.0.0.1:5000/upload_avatar",
+                        dataType: 'script',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,                         // Setting the data attribute of ajax with file_data
+                        type: 'post',
+                        success: successRep
+               })
+        })
+
+        function successRep(data)
+        {
+            retObj = JSON.parse(data)
+            $('#imageClassPlaceHolder').text("Class : "+retObj["imgClass"])
+        }
+
+    </script>
+
+   </body>
+</html>

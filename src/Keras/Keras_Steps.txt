@@ -1,0 +1,19 @@
+1.  Check for the below pre-reqs.
+
+Python 3.6
+Open CV
+Sklearn
+
+
+2. Install Keras.
+
+sudo pip install kera
+
+
+3. Replace the pickled data source path and traffic signs files path in the lines 47, 48, 49, 36.
+
+
+4. Place the new image to be tested and replace the new test image path in the line 227.
+
+
+5. Run the python file, keras_model.py.
