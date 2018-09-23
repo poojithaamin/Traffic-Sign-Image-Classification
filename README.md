@@ -11,9 +11,15 @@ The key to recognize the traffic signs is how to detect them and identify their 
 We plan try various classification algorithms such as Support Vector Machines, Linear Discriminant Analysis and Convolutional Neural Networks to see the effectiveness of each of these methods.
 Our focus will be on identifying some of the common data signs in the data set like pedestrian crossing, stop, signal ahead, added lane, keep right, merge, speed limit 25, and speed limit 35 signs. 
 We will have to deal with the following scenarios in the analysis:
+
 •	Different shapes
+
 •	Different signs
+
 •	Different positions
+
 •	Rotation
+
 •	Occlusion
+
 •	Sign sizes
