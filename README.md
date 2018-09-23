@@ -23,3 +23,12 @@ We will have to deal with the following scenarios in the analysis:
 •	Occlusion
 
 •	Sign sizes
+
+Machine Learning Models
+•	MLP Classifier - in Essence , a CNN.
+
+•	LinearSVC - SVM performs well with Image classification.
+
+•	Random Forests - Quick to build and Classify.
+
+•	Keras CNN - The Deep Learner Model.
