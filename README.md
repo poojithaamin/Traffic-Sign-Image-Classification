@@ -24,7 +24,10 @@ We will have to deal with the following scenarios in the analysis:
 
 •	Sign sizes
 
+
+
 Machine Learning Models
+
 •	MLP Classifier - in Essence , a CNN.
 
 •	LinearSVC - SVM performs well with Image classification.
